@@ -12,6 +12,7 @@
 - **バックエンド:**
   - 言語: Go 1.23.0
   - Webフレームワーク: Gin
+  - データベース: SQLite
 - **フロントエンド:**
   - フレームワーク: Angular 20.3.4
   - UIライブラリ: Angular Material
@@ -29,7 +30,8 @@
 │   ├── Dockerfile
 │   ├── go.mod
 │   ├── go.sum
-│   └── main.go         # アプリケーションのエントリーポイント
+│   ├── main.go         # アプリケーションのエントリーポイント
+│   └── database/       # SQLiteデータベースファイル
 ├── frontend/           # Angular アプリケーション
 │   ├── Dockerfile
 │   ├── angular.json
