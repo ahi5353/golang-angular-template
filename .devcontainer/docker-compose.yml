@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/workspace:cached
+    working_dir: /workspace/backend
+    ports:
+      - "8080:8080"
+    command: sleep infinity
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ../frontend:/workspace/frontend:cached
+    working_dir: /workspace/frontend
+    ports:
+      - "4200:4200"
+    command: sleep infinity

@@ -1,0 +1,20 @@
+{
+  "name": "Go & Angular Devcontainer",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "backend",
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.go",
+        "angular.ng-template"
+      ]
+    }
+  },
+  "forwardPorts": [
+    8080,
+    4200
+  ],
+  "postCreateCommand": "go mod tidy",
+  "remoteUser": "vscode"
+}
