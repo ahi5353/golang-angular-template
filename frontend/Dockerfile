@@ -9,6 +9,7 @@ COPY package*.json ./
 
 # Install any needed packages
 RUN npm install
+RUN npm install -g @angular/cli
 
 # Copy the rest of the application files to the working directory
 COPY . .
