@@ -1,0 +1,32 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/dist
+/npm-debug.log*
+/yarn-debug.log*
+/yarn-error.log*
+
+
+# local env files
+.env*.local
+.env
+
+# testing
+/coverage
+
+# misc
+.DS_Store
+.cache
+.project
+.settings
+.tmh
+.tmp
+.idea
+*.sublime-project
+*.sublime-workspace
+*.tgz
+
+# server binaries
+/backend/server
+/backend/backend
