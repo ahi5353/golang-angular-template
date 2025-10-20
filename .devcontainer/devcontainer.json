@@ -1,7 +1,8 @@
 {
   "name": "Go & Angular Devcontainer",
-  "dockerComposeFile": "docker-compose.yml",
-  "service": "backend",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
   "workspaceFolder": "/workspace",
   "customizations": {
     "vscode": {
