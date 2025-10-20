@@ -30,3 +30,5 @@
 # server binaries
 /backend/server
 /backend/backend
+/backend/webapp
+/backend/dist
