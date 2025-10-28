@@ -9,22 +9,29 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
+	"example.com/m/v2/database"
+	"example.com/m/v2/handlers"
+	"example.com/m/v2/middleware"
 )
 
 //go:embed all:dist
 var dist embed.FS
 
 func main() {
+	database.InitDB()
 	r := gin.Default()
 
 	// API routes
 	api := r.Group("/api")
 	{
-		api.GET("/ping", func(c *gin.Context) {
-			c.JSON(200, gin.H{
-				"message": "pong",
-			})
-		})
+		api.POST("/register", handlers.Register)
+		api.POST("/login", handlers.Login)
+		api.POST("/logout", handlers.Logout)
+		authorized := api.Group("/")
+		authorized.Use(middleware.AuthMiddleware())
+		{
+			authorized.GET("/user", handlers.GetUser)
+		}
 	}
 
 	// Serve the frontend
