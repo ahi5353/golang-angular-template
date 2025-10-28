@@ -3,7 +3,10 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
+  // Set the workspace folder to /workspace.
   "workspaceFolder": "/workspace",
+  // Mount the local workspace folder to /workspace in the container.
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
   "customizations": {
     "vscode": {
       "extensions": [
