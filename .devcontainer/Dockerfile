@@ -1,5 +1,5 @@
 # Use the official Golang image as a base image
-FROM golang:1.23.0
+FROM golang:1.25.3
 
 # Install system dependencies, including Node.js, npm, and sudo
 # See https://github.com/nodesource/distributions#debinstall
