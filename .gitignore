@@ -32,3 +32,6 @@
 /backend/backend
 /backend/webapp
 /backend/dist
+
+# log files
+*.log
