@@ -1,18 +1,4 @@
-@use '@angular/material' as mat;
-
-// Define and apply the M3 theme in a single step, based on the latest official documentation.
-// This simpler approach passes the palette directly and avoids issues with undefined functions.
-html {
-  @include mat.theme((
-    color: (
-      primary: mat.$indigo-palette,
-      tertiary: mat.$pink-palette,
-      error: mat.$red-palette
-    ),
-    typography: mat.define-typography-config(),
-    density: 0,
-  ));
-}
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 // Global styles
 html, body { height: 100%; }
