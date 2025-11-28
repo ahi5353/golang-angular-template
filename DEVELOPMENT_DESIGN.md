@@ -14,9 +14,10 @@
   - Webフレームワーク: Gin
   - データベース: SQLite
 - **フロントエンド:**
-  - フレームワーク: Angular 20.3.4
-  - UIライブラリ: Angular Material
+  - フレームワーク: Angular 21.0.1
+  - UIライブラリ: Angular Material (v21.0.1)
   - パッケージ管理: npm
+  
 - **開発・実行環境:**
   - コンテナ: Dev Container (Docker)
 
