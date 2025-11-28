@@ -1,21 +1,22 @@
 package main
 
 import (
-	"embed"
 	"io/fs"
 	"mime"
 	"net/http"
+	"os"
 	"path/filepath"
 	"strings"
 
-	"github.com/gin-gonic/gin"
 	"example.com/m/v2/database"
 	"example.com/m/v2/handlers"
 	"example.com/m/v2/middleware"
+	"github.com/gin-gonic/gin"
 )
 
-//go:embed all:dist
-var dist embed.FS
+// NOTE: In production you may want to use //go:embed to embed the frontend
+// into the binary. For development (when frontend/dist may not exist at
+// build time) prefer serving the built files from the filesystem.
 
 func main() {
 	database.InitDB()
@@ -34,44 +35,61 @@ func main() {
 		}
 	}
 
-	// Serve the frontend
-	staticFiles, err := fs.Sub(dist, "dist/browser")
-	if err != nil {
-		panic(err)
+	// Serve the frontend: prefer ../frontend/dist/browser (when running from
+	// backend/). If not found, try ./dist/browser. If neither exists, requests
+	// for non-API routes return 404 with a helpful message.
+	var staticFiles fs.FS
+	if _, err := os.Stat("../frontend/dist/browser"); err == nil {
+		staticFiles = os.DirFS("../frontend/dist/browser")
+	} else if _, err := os.Stat("./dist/browser"); err == nil {
+		staticFiles = os.DirFS("./dist/browser")
+	} else {
+		staticFiles = nil
 	}
 
-	r.Use(func(c *gin.Context) {
-		if strings.HasPrefix(c.Request.URL.Path, "/api") {
-			c.Next()
-			return
-		}
-
-		filePath := strings.TrimLeft(c.Request.URL.Path, "/")
-		if filePath == "" {
-			filePath = "index.html"
-		}
-
-		fileContent, err := fs.ReadFile(staticFiles, filePath)
-		if err != nil {
-			// If file not found, serve index.html for client-side routing
-			filePath = "index.html"
-			fileContent, err = fs.ReadFile(staticFiles, filePath)
-			if err != nil {
-				// If index.html is also not found, return 404
-				c.String(http.StatusNotFound, "not found")
+	if staticFiles == nil {
+		r.Use(func(c *gin.Context) {
+			if strings.HasPrefix(c.Request.URL.Path, "/api") {
+				c.Next()
 				return
 			}
-		}
+			c.String(http.StatusNotFound, "frontend not built; run the frontend build (see frontend/README.md)")
+			c.Abort()
+		})
+	} else {
+		r.Use(func(c *gin.Context) {
+			if strings.HasPrefix(c.Request.URL.Path, "/api") {
+				c.Next()
+				return
+			}
 
-		// Determine the content type based on the file extension
-		contentType := mime.TypeByExtension(filepath.Ext(filePath))
-		if contentType == "" {
-			contentType = "application/octet-stream"
-		}
+			filePath := strings.TrimLeft(c.Request.URL.Path, "/")
+			if filePath == "" {
+				filePath = "index.html"
+			}
 
-		c.Data(http.StatusOK, contentType, fileContent)
-		c.Abort()
-	})
+			fileContent, err := fs.ReadFile(staticFiles, filePath)
+			if err != nil {
+				// If file not found, serve index.html for client-side routing
+				filePath = "index.html"
+				fileContent, err = fs.ReadFile(staticFiles, filePath)
+				if err != nil {
+					// If index.html is also not found, return 404
+					c.String(http.StatusNotFound, "not found")
+					return
+				}
+			}
+
+			// Determine the content type based on the file extension
+			contentType := mime.TypeByExtension(filepath.Ext(filePath))
+			if contentType == "" {
+				contentType = "application/octet-stream"
+			}
+
+			c.Data(http.StatusOK, contentType, fileContent)
+			c.Abort()
+		})
+	}
 
 	r.Run(":8080") // listen and serve on 0.0.0.0:8080
 }
