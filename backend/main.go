@@ -25,6 +25,7 @@ func main() {
 	// API routes
 	api := r.Group("/api")
 	{
+		api.GET("/initial-route", handlers.InitialRoute)
 		api.POST("/register", handlers.Register)
 		api.POST("/login", handlers.Login)
 		api.POST("/logout", handlers.Logout)

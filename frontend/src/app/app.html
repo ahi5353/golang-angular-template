@@ -1,15 +1,1 @@
-<nav>
-  <ul>
-    <li><a routerLink="/">Home</a></li>
-    @if (!(isLoggedIn$ | async)) {
-      <li><a routerLink="/login">Login</a></li>
-    }
-    @if (!(isLoggedIn$ | async)) {
-      <li><a routerLink="/register">Register</a></li>
-    }
-    @if (isLoggedIn$ | async) {
-      <li><a (click)="logout()">Logout</a></li>
-    }
-  </ul>
-</nav>
 <router-outlet></router-outlet>
