@@ -91,3 +91,18 @@ func GetUser(c *gin.Context) {
 
 	c.JSON(http.StatusOK, user)
 }
+
+func InitialRoute(c *gin.Context) {
+	var count int
+	err := database.DB.QueryRow("SELECT COUNT(*) FROM users").Scan(&count)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+		return
+	}
+
+	if count == 0 {
+		c.JSON(http.StatusOK, gin.H{"redirectTo": "/register"})
+	} else {
+		c.JSON(http.StatusOK, gin.H{"redirectTo": "/login"})
+	}
+}
