@@ -26,30 +26,34 @@ This project is configured to be used with a development container.
     ```
 3.  **Run the development server:**
     ```bash
-    npx ng serve
+    npm start
     ```
-    **Note:** The Angular CLI (`ng`) is not in the default PATH. You must use `npx` to run Angular CLI commands.
-
 The frontend will be available at `http://localhost:4200`. API requests to `/api` will be proxied to the backend at `http://localhost:8080`.
 
-## Running the Backend (Go)
+**Note:** The `npm start` command typically runs `ng serve`. For other Angular CLI commands (e.g., `ng generate`), you may need to use `npx` as the `ng` executable might not be in the default PATH (e.g., `npx ng generate component my-component`).
 
-The `go run` command can be unreliable and may time out in this devcontainer. It is recommended to build the binary first and then execute it.
+## Running the Backend (Go)
 
 1.  **Navigate to the backend directory:**
     ```bash
     cd backend
     ```
-2.  **Build the binary:**
+2.  **Install dependencies:**
     ```bash
-    go build -o webapp .
+    go mod download
     ```
-3.  **Run the executable:**
+3.  **Run the server:**
     ```bash
-    ./webapp
+    go run main.go
     ```
-
 The backend server will start on `http://localhost:8080`.
+
+**Note for Agents in Dev Container**: The `go run` command can sometimes be unreliable in the dev container. If you encounter issues, it is recommended to build the binary first and then execute it:
+```bash
+# Alternative for dev container
+go build -o webapp .
+./webapp
+```
 
 ## Production Build
 
