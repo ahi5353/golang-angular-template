@@ -11,6 +11,18 @@ import (
 )
 
 func Register(c *gin.Context) {
+	var count int
+	err := database.DB.QueryRow("SELECT COUNT(*) FROM users").Scan(&count)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+		return
+	}
+
+	if count > 0 {
+		c.JSON(http.StatusForbidden, gin.H{"error": "Registration is disabled because users already exist"})
+		return
+	}
+
 	var json struct {
 		Username string `json:"username"`
 		Password string `json:"password"`
