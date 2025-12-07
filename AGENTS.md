@@ -55,6 +55,14 @@ go build -o webapp .
 ./webapp
 ```
 
+## Running Both (Convenience)
+
+To run both the backend and frontend simultaneously with a single command:
+```bash
+make dev
+```
+This command starts both servers and handles cleanup when stopped (Ctrl+C).
+
 ## Production Build
 
 For details on the production build process, where the Go binary serves the compiled Angular application, please refer to [DEVELOPMENT_DESIGN.md](./DEVELOPMENT_DESIGN.md).
