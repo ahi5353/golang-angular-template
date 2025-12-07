@@ -1,12 +1,10 @@
-<mat-toolbar color="primary">
-  <span>My Application</span>
-  <span class="spacer"></span>
-  <button mat-button>Sample</button>
-  <button mat-button routerLink="/accounts">ACCOUNT</button>
-  <button mat-button (click)="logout()">Logout</button>
-</mat-toolbar>
-
-<main>
-  <h1>Welcome, {{ username }}!</h1>
-  <!-- Main content goes here -->
-</main>
+<div class="dashboard-content">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Dashboard</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Welcome to the dashboard, {{ username }}!</p>
+    </mat-card-content>
+  </mat-card>
+</div>
