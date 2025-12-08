@@ -1,0 +1,141 @@
+<div class="sample-container">
+  <h1>Sample Screen (M3 Typography & Components)</h1>
+
+  <section>
+    <h2>Typography</h2>
+    <div class="typography-demo">
+      <h1 class="mat-display-large">Display Large</h1>
+      <h2 class="mat-display-medium">Display Medium</h2>
+      <h3 class="mat-display-small">Display Small</h3>
+
+      <h1 class="mat-headline-large">Headline Large</h1>
+      <h2 class="mat-headline-medium">Headline Medium</h2>
+      <h3 class="mat-headline-small">Headline Small</h3>
+
+      <h1 class="mat-title-large">Title Large</h1>
+      <h2 class="mat-title-medium">Title Medium</h2>
+      <h3 class="mat-title-small">Title Small</h3>
+
+      <p class="mat-body-large">Body Large - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <p class="mat-body-medium">Body Medium - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <p class="mat-body-small">Body Small - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+      <p class="mat-label-large">Label Large</p>
+      <p class="mat-label-medium">Label Medium</p>
+      <p class="mat-label-small">Label Small</p>
+    </div>
+  </section>
+
+  <mat-divider></mat-divider>
+
+  <section>
+    <h2>Buttons</h2>
+    <div class="component-demo">
+      <button mat-button>Basic</button>
+      <button mat-raised-button>Raised</button>
+      <button mat-stroked-button>Stroked</button>
+      <button mat-flat-button>Flat</button>
+      <button mat-icon-button aria-label="Example icon-button with a heart icon">
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <button mat-fab aria-label="Example icon-button with a heart icon">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button mat-mini-fab aria-label="Example icon-button with a heart icon">
+        <mat-icon>home</mat-icon>
+      </button>
+      <button mat-raised-button color="primary">Primary</button>
+      <button mat-raised-button color="accent">Accent</button>
+      <button mat-raised-button color="warn">Warn</button>
+      <button mat-raised-button disabled>Disabled</button>
+    </div>
+  </section>
+
+  <mat-divider></mat-divider>
+
+  <section>
+    <h2>Form Fields & Inputs</h2>
+    <div class="component-demo">
+      <mat-form-field appearance="fill">
+        <mat-label>Input</mat-label>
+        <input matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Outline Input</mat-label>
+        <input matInput placeholder="Placeholder">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint>Hint text</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Select</mat-label>
+        <mat-select>
+          <mat-option value="one">First option</mat-option>
+          <mat-option value="two">Second option</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </section>
+
+  <mat-divider></mat-divider>
+
+  <section>
+    <h2>Cards</h2>
+    <div class="component-demo">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Shiba Inu</mat-card-title>
+          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+          <p>
+            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+            bred for hunting.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </section>
+
+  <mat-divider></mat-divider>
+
+  <section>
+    <h2>Selection Controls</h2>
+    <div class="component-demo column">
+      <mat-checkbox>Check me!</mat-checkbox>
+      <mat-checkbox [checked]="true">Checked</mat-checkbox>
+      <mat-checkbox [indeterminate]="true">Indeterminate</mat-checkbox>
+
+      <mat-radio-group aria-label="Select an option">
+        <mat-radio-button value="1">Option 1</mat-radio-button>
+        <mat-radio-button value="2">Option 2</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-slide-toggle>Slide me!</mat-slide-toggle>
+    </div>
+  </section>
+
+    <section>
+    <h2>Chips</h2>
+    <mat-chip-listbox aria-label="Fish selection">
+        <mat-chip-option>One fish</mat-chip-option>
+        <mat-chip-option>Two fish</mat-chip-option>
+        <mat-chip-option color="accent" selected>Accent fish</mat-chip-option>
+        <mat-chip-option color="warn">Warn fish</mat-chip-option>
+    </mat-chip-listbox>
+  </section>
+
+  <section>
+    <h2>Progress Spinner</h2>
+     <mat-spinner></mat-spinner>
+  </section>
+
+</div>
