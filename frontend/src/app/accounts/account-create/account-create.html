@@ -5,11 +5,11 @@
     </mat-card-header>
     <mat-card-content>
       <form (ngSubmit)="createAccount()">
-        <mat-form-field appearance="fill">
+        <mat-form-field>
           <mat-label>Username</mat-label>
           <input matInput [(ngModel)]="username" name="username" required>
         </mat-form-field>
-        <mat-form-field appearance="fill">
+        <mat-form-field>
           <mat-label>Password</mat-label>
           <input matInput type="password" [(ngModel)]="password" name="password" required>
         </mat-form-field>
@@ -18,7 +18,7 @@
         </div>
         <div class="actions">
           <button mat-button type="button" (click)="cancel()">Cancel</button>
-          <button mat-raised-button color="primary" type="submit">Create</button>
+          <button mat-flat-button type="submit">Create</button>
         </div>
       </form>
     </mat-card-content>

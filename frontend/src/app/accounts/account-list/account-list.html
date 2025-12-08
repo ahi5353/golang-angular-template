@@ -1,12 +1,12 @@
 <div class="account-list-container">
   <div class="header">
     <h2>Accounts</h2>
-    <button mat-raised-button color="primary" (click)="goToCreate()">
+    <button mat-flat-button (click)="goToCreate()">
       <mat-icon>add</mat-icon> Add Account
     </button>
   </div>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
     <!-- ID Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>
