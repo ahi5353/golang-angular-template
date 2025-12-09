@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class AuthService {
   private apiUrl = '/api';
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   register(credentials: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, credentials);
@@ -28,8 +29,16 @@ export class AuthService {
   }
 
   logout() {
+    this.http.post(`${this.apiUrl}/logout`, {}).subscribe({
+      next: () => this.doLogout(),
+      error: () => this.doLogout()
+    });
+  }
+
+  private doLogout() {
     localStorage.removeItem('token');
     this.loggedIn.next(false);
+    this.router.navigate(['/login']);
   }
 
   getToken(): string | null {
