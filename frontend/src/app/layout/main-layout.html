@@ -1,10 +1,10 @@
 <mat-toolbar color="primary">
   <span>Go-Angular App</span>
   <span class="spacer"></span>
-  <button mat-button routerLink="/dashboard">ダッシュボード</button>
-  <button mat-button routerLink="/sample">サンプル</button>
-  <button mat-button routerLink="/accounts">ACCOUNT</button>
-  <button mat-icon-button (click)="logout()">
+  <button matButton="text" routerLink="/dashboard">ダッシュボード</button>
+  <button matButton="text" routerLink="/sample">サンプル</button>
+  <button matButton="text" routerLink="/accounts">ACCOUNT</button>
+  <button matIconButton (click)="logout()">
     <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>
