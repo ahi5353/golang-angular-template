@@ -31,23 +31,26 @@
   <section>
     <h2>Buttons</h2>
     <div class="component-demo">
-      <button mat-button>Basic</button>
-      <button mat-raised-button>Raised</button>
-      <button mat-stroked-button>Stroked</button>
-      <button mat-flat-button>Flat</button>
-      <button mat-icon-button aria-label="Example icon-button with a heart icon">
+      <button matButton>Basic (Text)</button>
+      <button matButton="elevated">Elevated (Raised)</button>
+      <button matButton="filled">Filled (Flat)</button>
+      <button matButton="tonal">Tonal</button>
+      <button matButton="outlined">Outlined (Stroked)</button>
+
+      <button matIconButton aria-label="Example icon-button with a heart icon">
         <mat-icon>favorite</mat-icon>
       </button>
-      <button mat-fab aria-label="Example icon-button with a heart icon">
+      <button matFab aria-label="Example icon-button with a heart icon">
         <mat-icon>delete</mat-icon>
       </button>
-      <button mat-mini-fab aria-label="Example icon-button with a heart icon">
+      <button matMiniFab aria-label="Example icon-button with a heart icon">
         <mat-icon>home</mat-icon>
       </button>
-      <button mat-raised-button color="primary">Primary</button>
-      <button mat-raised-button color="accent">Accent</button>
-      <button mat-raised-button color="warn">Warn</button>
-      <button mat-raised-button disabled>Disabled</button>
+
+      <button matButton="elevated">Primary (Default in M3)</button>
+      <button matButton="elevated">Accent (Default in M3)</button>
+      <button matButton="elevated">Warn (Default in M3)</button>
+      <button matButton="elevated" disabled>Disabled</button>
     </div>
   </section>
 
@@ -98,8 +101,8 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
+          <button matButton>LIKE</button>
+          <button matButton>SHARE</button>
         </mat-card-actions>
       </mat-card>
     </div>
