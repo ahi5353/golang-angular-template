@@ -6,7 +6,6 @@ import { AuthGuard } from './auth/auth-guard';
 import { GuestGuard } from './auth/guest-guard';
 import { InitialLoadComponent } from './initial-load/initial-load';
 import { AccountListComponent } from './accounts/account-list/account-list';
-import { AccountCreateComponent } from './accounts/account-create/account-create';
 import { MainLayoutComponent } from './layout/main-layout';
 import { SampleComponent } from './sample/sample';
 
@@ -21,7 +20,6 @@ export const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'accounts', component: AccountListComponent },
-      { path: 'accounts/create', component: AccountCreateComponent },
       { path: 'sample', component: SampleComponent }
     ]
   }
