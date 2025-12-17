@@ -35,6 +35,7 @@ func main() {
 			authorized.GET("/user", handlers.GetUser)
 			authorized.GET("/users", handlers.GetUsers)
 			authorized.POST("/users", handlers.CreateUser)
+			authorized.DELETE("/users/:id", handlers.DeleteUser)
 		}
 	}
 
