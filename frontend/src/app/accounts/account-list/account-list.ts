@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AccountCreateComponent } from '../account-create/account-create';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog';
 
 interface User {
   id: number;
@@ -28,8 +29,9 @@ interface User {
   styleUrls: ['./account-list.css']
 })
 export class AccountListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'username'];
+  displayedColumns: string[] = ['id', 'username', 'actions'];
   dataSource: User[] = [];
+  currentUser: User | null = null;
 
   constructor(
     private http: HttpClient,
@@ -39,6 +41,18 @@ export class AccountListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUsers();
+    this.loadCurrentUser();
+  }
+
+  loadCurrentUser(): void {
+    this.http.get<User>('/api/user').subscribe({
+      next: (user) => {
+        this.currentUser = user;
+      },
+      error: (err) => {
+        console.error('Failed to fetch current user', err);
+      }
+    });
   }
 
   loadUsers(): void {
@@ -62,6 +76,31 @@ export class AccountListComponent implements OnInit {
         this.loadUsers();
         this.snackBar.open('Account created successfully', 'Close', {
           duration: 3000
+        });
+      }
+    });
+  }
+
+  deleteUser(userId: number): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.http.delete(`/api/users/${userId}`).subscribe({
+          next: () => {
+            this.loadUsers();
+            this.snackBar.open('Account deleted successfully', 'Close', {
+              duration: 3000
+            });
+          },
+          error: (err) => {
+            console.error('Failed to delete user', err);
+            this.snackBar.open('Failed to delete account', 'Close', {
+              duration: 3000
+            });
+          }
         });
       }
     });
