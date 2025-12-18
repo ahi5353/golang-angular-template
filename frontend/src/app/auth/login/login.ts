@@ -33,7 +33,7 @@ export class LoginComponent {
     this.authService.login({ username: this.username, password: this.password }).subscribe({
       next: () => this.router.navigate(['/dashboard']),
       error: (err) => {
-        this.error = err?.error?.error || 'Login failed';
+        this.error = err?.error?.error || 'ログインに失敗しました';
       }
     });
   }

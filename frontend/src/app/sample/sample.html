@@ -1,8 +1,8 @@
 <div class="sample-container">
-  <h1>Sample Screen (M3 Typography & Components)</h1>
+  <h1>サンプル画面 (M3 Typography & Components)</h1>
 
   <section>
-    <h2>Typography</h2>
+    <h2>タイポグラフィ</h2>
     <div class="typography-demo">
       <h1 class="mat-display-large">Display Large</h1>
       <h2 class="mat-display-medium">Display Medium</h2>
@@ -29,53 +29,53 @@
   <mat-divider></mat-divider>
 
   <section>
-    <h2>Buttons</h2>
+    <h2>ボタン</h2>
     <div class="component-demo">
-      <button matButton>Basic (Text)</button>
-      <button matButton="elevated">Elevated (Raised)</button>
-      <button matButton="filled">Filled (Flat)</button>
-      <button matButton="tonal">Tonal</button>
-      <button matButton="outlined">Outlined (Stroked)</button>
+      <button matButton>ベーシック (テキスト)</button>
+      <button matButton="elevated">エレベーテッド (浮き上がり)</button>
+      <button matButton="filled">フィルド (塗りつぶし)</button>
+      <button matButton="tonal">トーナル (色調)</button>
+      <button matButton="outlined">アウトライン (枠線)</button>
 
-      <button matIconButton aria-label="Example icon-button with a heart icon">
+      <button matIconButton aria-label="ハートアイコン付きのアイコンボタンの例">
         <mat-icon>favorite</mat-icon>
       </button>
-      <button matFab aria-label="Example icon-button with a heart icon">
+      <button matFab aria-label="ハートアイコン付きのアイコンボタンの例">
         <mat-icon>delete</mat-icon>
       </button>
-      <button matMiniFab aria-label="Example icon-button with a heart icon">
+      <button matMiniFab aria-label="ハートアイコン付きのアイコンボタンの例">
         <mat-icon>home</mat-icon>
       </button>
 
-      <button matButton="elevated">Primary (Default in M3)</button>
-      <button matButton="elevated">Accent (Default in M3)</button>
-      <button matButton="elevated">Warn (Default in M3)</button>
-      <button matButton="elevated" disabled>Disabled</button>
+      <button matButton="elevated">プライマリ (M3のデフォルト)</button>
+      <button matButton="elevated">アクセント (M3のデフォルト)</button>
+      <button matButton="elevated">警告 (M3のデフォルト)</button>
+      <button matButton="elevated" disabled>無効</button>
     </div>
   </section>
 
   <mat-divider></mat-divider>
 
   <section>
-    <h2>Form Fields & Inputs</h2>
+    <h2>フォームフィールド & 入力</h2>
     <div class="component-demo">
       <mat-form-field>
-        <mat-label>Input</mat-label>
+        <mat-label>入力</mat-label>
         <input matInput>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Outline Input</mat-label>
-        <input matInput placeholder="Placeholder">
+        <mat-label>アウトライン入力</mat-label>
+        <input matInput placeholder="プレースホルダー">
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        <mat-hint>Hint text</mat-hint>
+        <mat-hint>ヒントテキスト</mat-hint>
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Select</mat-label>
+        <mat-label>選択</mat-label>
         <mat-select>
-          <mat-option value="one">First option</mat-option>
-          <mat-option value="two">Second option</mat-option>
+          <mat-option value="one">オプション 1</mat-option>
+          <mat-option value="two">オプション 2</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -84,25 +84,24 @@
   <mat-divider></mat-divider>
 
   <section>
-    <h2>Cards</h2>
+    <h2>カード</h2>
     <div class="component-demo">
       <mat-card class="example-card">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Shiba Inu</mat-card-title>
-          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+          <mat-card-title>柴犬</mat-card-title>
+          <mat-card-subtitle>犬種</mat-card-subtitle>
         </mat-card-header>
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="柴犬の写真">
         <mat-card-content>
           <p>
-            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-            bred for hunting.
+            柴犬は、日本原産の6つのスピッツ系犬種の中で最も小さい犬種です。
+            山岳地帯での活動に適した小型で機敏な犬であり、元々は狩猟のために飼育されていました。
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button matButton>LIKE</button>
-          <button matButton>SHARE</button>
+          <button matButton>いいね</button>
+          <button matButton>シェア</button>
         </mat-card-actions>
       </mat-card>
     </div>
@@ -111,33 +110,33 @@
   <mat-divider></mat-divider>
 
   <section>
-    <h2>Selection Controls</h2>
+    <h2>選択コントロール</h2>
     <div class="component-demo column">
-      <mat-checkbox>Check me!</mat-checkbox>
-      <mat-checkbox [checked]="true">Checked</mat-checkbox>
-      <mat-checkbox [indeterminate]="true">Indeterminate</mat-checkbox>
+      <mat-checkbox>チェックしてね！</mat-checkbox>
+      <mat-checkbox [checked]="true">チェック済み</mat-checkbox>
+      <mat-checkbox [indeterminate]="true">不定 (Indeterminate)</mat-checkbox>
 
-      <mat-radio-group aria-label="Select an option">
-        <mat-radio-button value="1">Option 1</mat-radio-button>
-        <mat-radio-button value="2">Option 2</mat-radio-button>
+      <mat-radio-group aria-label="オプションを選択">
+        <mat-radio-button value="1">オプション 1</mat-radio-button>
+        <mat-radio-button value="2">オプション 2</mat-radio-button>
       </mat-radio-group>
 
-      <mat-slide-toggle>Slide me!</mat-slide-toggle>
+      <mat-slide-toggle>スライドしてね！</mat-slide-toggle>
     </div>
   </section>
 
     <section>
-    <h2>Chips</h2>
-    <mat-chip-listbox aria-label="Fish selection">
-        <mat-chip-option>One fish</mat-chip-option>
-        <mat-chip-option>Two fish</mat-chip-option>
-        <mat-chip-option color="accent" selected>Accent fish</mat-chip-option>
-        <mat-chip-option color="warn">Warn fish</mat-chip-option>
+    <h2>チップス</h2>
+    <mat-chip-listbox aria-label="魚の選択">
+        <mat-chip-option>魚 1</mat-chip-option>
+        <mat-chip-option>魚 2</mat-chip-option>
+        <mat-chip-option color="accent" selected>アクセントの魚</mat-chip-option>
+        <mat-chip-option color="warn">警告の魚</mat-chip-option>
     </mat-chip-listbox>
   </section>
 
   <section>
-    <h2>Progress Spinner</h2>
+    <h2>プログレススピナー</h2>
      <mat-spinner></mat-spinner>
   </section>
 

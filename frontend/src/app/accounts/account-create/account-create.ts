@@ -37,7 +37,7 @@ export class AccountCreateComponent {
         this.dialogRef.close(true);
       },
       error: (err) => {
-        this.errorMessage = 'Failed to create account. Username might be taken.';
+        this.errorMessage = 'アカウント作成に失敗しました。ユーザー名が既に使用されている可能性があります。';
         console.error(err);
       }
     });

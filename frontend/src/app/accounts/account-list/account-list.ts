@@ -74,7 +74,7 @@ export class AccountListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
         this.loadUsers();
-        this.snackBar.open('Account created successfully', 'Close', {
+        this.snackBar.open('アカウントが作成されました', '閉じる', {
           duration: 3000
         });
       }
@@ -91,13 +91,13 @@ export class AccountListComponent implements OnInit {
         this.http.delete(`/api/users/${userId}`).subscribe({
           next: () => {
             this.loadUsers();
-            this.snackBar.open('Account deleted successfully', 'Close', {
+            this.snackBar.open('アカウントが削除されました', '閉じる', {
               duration: 3000
             });
           },
           error: (err) => {
             console.error('Failed to delete user', err);
-            this.snackBar.open('Failed to delete account', 'Close', {
+            this.snackBar.open('アカウントの削除に失敗しました', '閉じる', {
               duration: 3000
             });
           }
