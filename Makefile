@@ -5,5 +5,5 @@ dev:
 	@echo "Press Ctrl+C to stop both servers."
 	@(trap 'kill 0' INT TERM; \
 	cd backend && go run main.go & \
-	cd frontend && npm start & \
+	cd frontend && NG_CLI_ANALYTICS=false npm start & \
 	wait)
