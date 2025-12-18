@@ -3,9 +3,22 @@
 
 @include mat.core();
 
-$my-app-theme: mat.define-theme((
+$light-theme: mat.define-theme((
   color: (
-    theme-type: color-scheme,
+    theme-type: light,
+    primary: theme.$primary-palette,
+    tertiary: theme.$tertiary-palette,
+  ),
+  typography: (
+    brand-family: 'Roboto, sans-serif',
+    plain-family: 'Roboto, sans-serif',
+  ),
+  density: (scale: 0),
+));
+
+$dark-theme: mat.define-theme((
+  color: (
+    theme-type: dark,
     primary: theme.$primary-palette,
     tertiary: theme.$tertiary-palette,
   ),
@@ -20,8 +33,12 @@ $my-app-theme: mat.define-theme((
 html, body { height: 100%; }
 
 html {
-  @include mat.all-component-themes($my-app-theme);
+  @include mat.all-component-themes($light-theme);
   color-scheme: light dark;
+
+  @media (prefers-color-scheme: dark) {
+    @include mat.all-component-themes($dark-theme);
+  }
 }
 
 body {
