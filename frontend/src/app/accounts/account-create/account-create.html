@@ -1,12 +1,12 @@
-<h2 mat-dialog-title>Create New Account</h2>
+<h2 mat-dialog-title>新規アカウント作成</h2>
 <mat-dialog-content>
   <form (ngSubmit)="createAccount()" class="create-form">
     <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Username</mat-label>
+      <mat-label>ユーザー名</mat-label>
       <input matInput [(ngModel)]="username" name="username" required>
     </mat-form-field>
     <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Password</mat-label>
+      <mat-label>パスワード</mat-label>
       <input matInput type="password" [(ngModel)]="password" name="password" required>
     </mat-form-field>
     <div class="error-message" *ngIf="errorMessage">
@@ -17,6 +17,6 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button matButton (click)="cancel()">Cancel</button>
-  <button matButton="filled" (click)="createAccount()">Create</button>
+  <button matButton (click)="cancel()">キャンセル</button>
+  <button matButton="filled" (click)="createAccount()">作成</button>
 </mat-dialog-actions>

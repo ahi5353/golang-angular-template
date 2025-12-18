@@ -32,7 +32,7 @@ export class RegisterComponent {
 
   onSubmit(): void {
     if (this.password !== this.confirmPassword) {
-      this.error = 'Passwords do not match';
+      this.error = 'パスワードが一致しません';
       return;
     }
 
@@ -48,7 +48,7 @@ export class RegisterComponent {
         });
       },
       error: (err) => {
-        this.error = err?.error?.error || 'Registration failed';
+        this.error = err?.error?.error || '登録に失敗しました';
       }
     });
   }

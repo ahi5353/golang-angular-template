@@ -1,26 +1,26 @@
 <div class="register-container">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Register</mat-card-title>
+      <mat-card-title>アカウント登録</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <form (ngSubmit)="onSubmit()">
         <mat-form-field>
-          <mat-label>Username</mat-label>
+          <mat-label>ユーザー名</mat-label>
           <input matInput [(ngModel)]="username" name="username" required>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Password</mat-label>
+          <mat-label>パスワード</mat-label>
           <input matInput type="password" [(ngModel)]="password" name="password" required>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Confirm Password</mat-label>
+          <mat-label>パスワード（確認）</mat-label>
           <input matInput type="password" [(ngModel)]="confirmPassword" name="confirmPassword" required>
         </mat-form-field>
         @if (error) {
           <p class="error-message">{{ error }}</p>
         }
-        <button matButton="filled" type="submit">Register</button>
+        <button matButton="filled" type="submit">登録</button>
       </form>
     </mat-card-content>
   </mat-card>
