@@ -1,5 +1,29 @@
+@use '@angular/material' as mat;
+@use './theme-colors' as theme;
+
+@include mat.core();
+
+$my-app-theme: mat.define-theme((
+  color: (
+    theme-type: color-scheme,
+    primary: theme.$primary-palette,
+    tertiary: theme.$tertiary-palette,
+  ),
+  typography: (
+    brand-family: 'Roboto, sans-serif',
+    plain-family: 'Roboto, sans-serif',
+  ),
+  density: (scale: 0),
+));
+
 // Global styles
 html, body { height: 100%; }
+
+html {
+  @include mat.all-component-themes($my-app-theme);
+  color-scheme: light dark;
+}
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
