@@ -34,10 +34,20 @@ html, body { height: 100%; }
 
 html {
   @include mat.all-component-themes($light-theme);
+  @include mat.typography-hierarchy($light-theme);
   color-scheme: light dark;
+
+  .secondary-button {
+    @include mat.button-color($light-theme, $color-variant: secondary);
+  }
 
   @media (prefers-color-scheme: dark) {
     @include mat.all-component-themes($dark-theme);
+    @include mat.typography-hierarchy($dark-theme);
+
+    .secondary-button {
+      @include mat.button-color($dark-theme, $color-variant: secondary);
+    }
   }
 }
 
