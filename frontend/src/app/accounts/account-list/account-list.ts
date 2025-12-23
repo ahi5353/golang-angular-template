@@ -6,6 +6,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { finalize } from 'rxjs/operators';
 import { AccountCreateComponent } from '../account-create/account-create';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog';
 
@@ -23,7 +25,8 @@ interface User {
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressBarModule
   ],
   templateUrl: './account-list.html',
   styleUrls: ['./account-list.css']
@@ -32,6 +35,7 @@ export class AccountListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'username', 'actions'];
   dataSource: User[] = [];
   currentUser: User | null = null;
+  isLoading = false;
 
   constructor(
     private http: HttpClient,
@@ -56,14 +60,17 @@ export class AccountListComponent implements OnInit {
   }
 
   loadUsers(): void {
-    this.http.get<User[]>('/api/users').subscribe({
-      next: (users) => {
-        this.dataSource = users;
-      },
-      error: (err) => {
-        console.error('Failed to fetch users', err);
-      }
-    });
+    this.isLoading = true;
+    this.http.get<User[]>('/api/users')
+      .pipe(finalize(() => this.isLoading = false))
+      .subscribe({
+        next: (users) => {
+          this.dataSource = users;
+        },
+        error: (err) => {
+          console.error('Failed to fetch users', err);
+        }
+      });
   }
 
   openCreateDialog(): void {
