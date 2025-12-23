@@ -50,7 +50,6 @@ html {
 
   @media (prefers-color-scheme: dark) {
     @include mat.theme($dark-theme-config);
-    @include mat.all-component-themes($dark-theme);
     @include mat.typography-hierarchy($dark-theme);
 
     .secondary-button {
