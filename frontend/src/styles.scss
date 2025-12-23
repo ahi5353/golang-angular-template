@@ -8,10 +8,12 @@ $light-theme: mat.define-theme((
     theme-type: light,
     primary: theme.$primary-palette,
     tertiary: theme.$tertiary-palette,
+    use-system-variables: true,
   ),
   typography: (
     brand-family: 'Roboto, "Noto Sans JP", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif',
     plain-family: 'Roboto, "Noto Sans JP", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif',
+    use-system-variables: true,
   ),
   density: (scale: 0),
 ));
@@ -21,10 +23,12 @@ $dark-theme: mat.define-theme((
     theme-type: dark,
     primary: theme.$primary-palette,
     tertiary: theme.$tertiary-palette,
+    use-system-variables: true,
   ),
   typography: (
     brand-family: 'Roboto, "Noto Sans JP", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif',
     plain-family: 'Roboto, "Noto Sans JP", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif',
+    use-system-variables: true,
   ),
   density: (scale: 0),
 ));
@@ -35,6 +39,8 @@ html, body { height: 100%; }
 html {
   @include mat.all-component-themes($light-theme);
   @include mat.typography-hierarchy($light-theme);
+  @include mat.system-level-colors($light-theme);
+  @include mat.system-level-typography($light-theme);
   color-scheme: light dark;
 
   .secondary-button {
@@ -44,6 +50,8 @@ html {
   @media (prefers-color-scheme: dark) {
     @include mat.all-component-themes($dark-theme);
     @include mat.typography-hierarchy($dark-theme);
+    @include mat.system-level-colors($dark-theme);
+    @include mat.system-level-typography($dark-theme);
 
     .secondary-button {
       @include mat.button-color($dark-theme, $color-variant: secondary);
