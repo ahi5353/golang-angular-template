@@ -1,10 +1,17 @@
 <div class="account-list-container">
   <div class="header">
     <h2>アカウント一覧</h2>
-    <button matButton="filled" (click)="openCreateDialog()">
-      <mat-icon>add</mat-icon> アカウント追加
-    </button>
+    <div class="actions">
+      <button matButton="outlined" (click)="loadUsers()" [disabled]="isLoading">
+        <mat-icon>refresh</mat-icon> 一覧を更新
+      </button>
+      <button matButton="filled" (click)="openCreateDialog()">
+        <mat-icon>add</mat-icon> アカウント追加
+      </button>
+    </div>
   </div>
+
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
 
   <table mat-table [dataSource]="dataSource">
     <!-- ID Column -->
