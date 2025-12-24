@@ -146,4 +146,17 @@
      <mat-spinner></mat-spinner>
   </section>
 
+  <mat-divider></mat-divider>
+
+  <section>
+    <h2>配色 (Colors)</h2>
+    <p>クリックしてCSS変数名(例: var(--mat-sys-primary))をコピー</p>
+    <div class="color-grid">
+      <div *ngFor="let role of colorRoles" class="color-item" (click)="copyToClipboard(role)">
+        <div class="color-box" [style.background-color]="'var(--mat-sys-' + role + ')'"></div>
+        <div class="color-label">--mat-sys-{{role}}</div>
+      </div>
+    </div>
+  </section>
+
 </div>
