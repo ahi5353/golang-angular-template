@@ -29,6 +29,8 @@ func main() {
 		api.POST("/register", handlers.Register)
 		api.POST("/login", handlers.Login)
 		api.POST("/logout", handlers.Logout)
+		api.GET("/settings", handlers.GetSettings)
+
 		authorized := api.Group("/")
 		authorized.Use(middleware.AuthMiddleware())
 		{
@@ -36,6 +38,7 @@ func main() {
 			authorized.GET("/users", handlers.GetUsers)
 			authorized.POST("/users", handlers.CreateUser)
 			authorized.DELETE("/users/:id", handlers.DeleteUser)
+			authorized.PUT("/settings", handlers.UpdateSettings)
 		}
 	}
 

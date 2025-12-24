@@ -1,0 +1,23 @@
+<div class="settings-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>システム設定</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="setting-item">
+        <h3>テーマカラー</h3>
+        <p>システム全体のテーマカラーを設定します。</p>
+        <div class="color-picker-wrapper">
+          <input type="color" [value]="primaryColor" (input)="onColorChange($event)">
+          <mat-form-field appearance="outline">
+            <mat-label>Hex Color</mat-label>
+            <input matInput [(ngModel)]="primaryColor" (ngModelChange)="onHexChange($event)" placeholder="#RRGGBB">
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-button color="primary" [disabled]="isLoading" (click)="saveSettings()">保存</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

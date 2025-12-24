@@ -1,0 +1,24 @@
+.settings-container {
+  padding: 24px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.setting-item {
+  margin-top: 16px;
+}
+
+.color-picker-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+
+  input[type="color"] {
+    width: 64px;
+    height: 64px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+  }
+}

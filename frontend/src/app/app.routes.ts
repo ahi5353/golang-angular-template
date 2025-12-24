@@ -20,7 +20,12 @@ export const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'accounts', component: AccountListComponent },
-      { path: 'sample', component: SampleComponent }
+      { path: 'sample', component: SampleComponent },
+      {
+        path: 'settings',
+        loadComponent: () =>
+          import('./features/settings/settings.component').then((m) => m.SettingsComponent),
+      }
     ]
   }
 ];
