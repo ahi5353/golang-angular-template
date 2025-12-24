@@ -43,3 +43,36 @@ h2 {
 mat-divider {
     margin: 20px 0;
 }
+
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+.color-item {
+  cursor: pointer;
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.color-item:hover {
+  transform: scale(1.02);
+  border-color: var(--mat-sys-primary);
+}
+
+.color-box {
+  height: 80px;
+  width: 100%;
+}
+
+.color-label {
+  padding: 8px;
+  font-size: 12px;
+  word-break: break-all;
+  text-align: center;
+  background-color: var(--mat-sys-surface-container);
+  color: var(--mat-sys-on-surface);
+}

@@ -12,6 +12,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sample',
@@ -29,9 +30,34 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSlideToggleModule,
     MatDividerModule,
     MatChipsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   templateUrl: './sample.html',
   styleUrl: './sample.css'
 })
-export class SampleComponent {}
+export class SampleComponent {
+  colorRoles = [
+    'primary', 'on-primary', 'primary-container', 'on-primary-container', 'inverse-primary',
+    'secondary', 'on-secondary', 'secondary-container', 'on-secondary-container',
+    'tertiary', 'on-tertiary', 'tertiary-container', 'on-tertiary-container',
+    'error', 'on-error', 'error-container', 'on-error-container',
+    'background', 'on-background',
+    'surface', 'on-surface', 'surface-variant', 'on-surface-variant', 'inverse-surface', 'inverse-on-surface',
+    'outline', 'outline-variant',
+    'scrim', 'shadow',
+    'surface-container-lowest', 'surface-container-low', 'surface-container', 'surface-container-high', 'surface-container-highest',
+    'surface-dim', 'surface-bright'
+  ];
+
+  constructor(private snackBar: MatSnackBar) {}
+
+  copyToClipboard(role: string) {
+    const variableName = `var(--mat-sys-${role})`;
+    navigator.clipboard.writeText(variableName).then(() => {
+      this.snackBar.open(`${variableName} copied to clipboard!`, 'Close', {
+        duration: 2000,
+      });
+    });
+  }
+}
