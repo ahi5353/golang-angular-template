@@ -31,3 +31,7 @@
 
 # log files
 *.log
+/backend/server
+/backend/backend
+/backend/webapp
+/backend/dist
