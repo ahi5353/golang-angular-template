@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth';
+import { ThemeService } from '../../services/theme.service';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -27,11 +28,18 @@ export class LoginComponent {
   password = '';
   error = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private themeService: ThemeService
+  ) { }
 
   onSubmit(): void {
     this.authService.login({ username: this.username, password: this.password }).subscribe({
-      next: () => this.router.navigate(['/dashboard']),
+      next: () => {
+        this.themeService.loadTheme(); // Reload theme after successful login
+        this.router.navigate(['/dashboard']);
+      },
       error: (err) => {
         this.error = err?.error?.error || 'ログインに失敗しました';
       }

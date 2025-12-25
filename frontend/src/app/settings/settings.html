@@ -1,0 +1,20 @@
+<div class="settings-container">
+  <h1>システム設定</h1>
+
+  <div class="settings-section">
+    <h2>テーマカラー</h2>
+    <div class="color-picker-wrapper">
+      <mat-form-field appearance="outline">
+        <mat-label>テーマカラー (Hex)</mat-label>
+        <input matInput [(ngModel)]="themeColor" placeholder="#000000">
+      </mat-form-field>
+      <input type="color" [(ngModel)]="themeColor" class="native-color-picker">
+    </div>
+
+    <div class="actions">
+      <button mat-flat-button (click)="saveTheme()" [disabled]="isLoading">
+        {{ isLoading ? '保存中...' : '保存' }}
+      </button>
+    </div>
+  </div>
+</div>

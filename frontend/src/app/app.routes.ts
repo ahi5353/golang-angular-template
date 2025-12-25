@@ -8,6 +8,7 @@ import { InitialLoadComponent } from './initial-load/initial-load';
 import { AccountListComponent } from './accounts/account-list/account-list';
 import { MainLayoutComponent } from './layout/main-layout';
 import { SampleComponent } from './sample/sample';
+import { SettingsComponent } from './settings/settings';
 
 export const routes: Routes = [
   { path: '', component: InitialLoadComponent, pathMatch: 'full' },
@@ -20,7 +21,8 @@ export const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'accounts', component: AccountListComponent },
-      { path: 'sample', component: SampleComponent }
+      { path: 'sample', component: SampleComponent },
+      { path: 'settings', component: SettingsComponent }
     ]
   }
 ];
