@@ -26,4 +26,14 @@ func InitDB() {
 	if err != nil {
 		log.Fatalf("Failed to create table: %v", err)
 	}
+
+	createSettingsTableSQL := `CREATE TABLE IF NOT EXISTS system_settings (
+		"key" TEXT NOT NULL PRIMARY KEY,
+		"value" TEXT NOT NULL
+	);`
+
+	_, err = DB.Exec(createSettingsTableSQL)
+	if err != nil {
+		log.Fatalf("Failed to create settings table: %v", err)
+	}
 }
