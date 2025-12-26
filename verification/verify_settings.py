@@ -42,15 +42,23 @@ def verify_settings(page):
     # 4. Verification
     # Take screenshot
     time.sleep(1) # wait for color application
-    page.screenshot(path="verification/settings_page.png")
+    page.screenshot(path="verification/settings_page_v2.png")
 
     # Check if style tag exists and has correct content
-    # We can check if a computed style on body has changed.
-    # Or check the injected style tag content.
+    # We specifically want to check for new surface container variables
     style_content = page.evaluate("document.getElementById('custom-theme-styles').textContent")
     print(f"Style Content length: {len(style_content)}")
-    if "--mat-sys-primary" not in style_content:
-        raise Exception("CSS variables not found in style tag")
+
+    required_vars = [
+        "--mat-sys-primary",
+        "--mat-sys-surface-container",
+        "--mat-sys-surface-dim",
+        "--mat-sys-surface-bright"
+    ]
+
+    for var in required_vars:
+        if var not in style_content:
+            raise Exception(f"Missing variable: {var}")
 
     # 5. Reload and verify persistence
     page.reload()
@@ -68,7 +76,7 @@ if __name__ == "__main__":
             verify_settings(page)
         except Exception as e:
             print(f"Error: {e}")
-            page.screenshot(path="verification/error.png")
+            page.screenshot(path="verification/error_v2.png")
             raise e
         finally:
             browser.close()

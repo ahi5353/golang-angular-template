@@ -2,22 +2,22 @@ import { Injectable, Inject, DOCUMENT } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+
 import {
   argbFromHex,
-  themeFromSourceColor,
-  applyTheme,
-  hexFromArgb
+  hexFromArgb,
+  Hct,
+  SchemeTonalSpot,
+  MaterialDynamicColors,
 } from '@material/material-color-utilities';
 
 interface SettingsResponse {
   theme_color: string;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class ThemeService {
-  private _themeColor = '#3f51b5'; // Default color
+  private _themeColor = '#3f51b5';
 
   constructor(
     private http: HttpClient,
@@ -49,56 +49,29 @@ export class ThemeService {
 
   private setThemeLocal(hex: string) {
     this._themeColor = hex;
-    const theme = themeFromSourceColor(argbFromHex(hex));
 
-    // Generate CSS variables for both light and dark schemes
-    // We map M3 tokens to Angular Material M3 system variables
-    const lightScheme = theme.schemes.light;
-    const darkScheme = theme.schemes.dark;
+    // --- ここが肝：seed color -> DynamicScheme (light/dark) ---
+    const seed = argbFromHex(hex);
+    const seedHct = Hct.fromInt(seed);
 
-    // We need to construct a CSS string that overrides the variables.
-    // Angular Material M3 variables generally follow the pattern --mat-sys-{token}
-    // See: https://material.angular.io/guide/theming#using-system-variables
+    const lightScheme = new SchemeTonalSpot(seedHct, /*isDark*/ false, /*contrast*/ 0.0);
+    const darkScheme  = new SchemeTonalSpot(seedHct, /*isDark*/ true,  /*contrast*/ 0.0);
+    // ↑ SchemeTonalSpot + MaterialDynamicColors を使う流れは MCU の推奨寄りの使い方 [5](https://www.npmjs.com/package/@material/material-color-utilities)
 
-    const generateCss = (scheme: any, prefix: string = '') => {
-        let css = '';
-        const props = [
-            'primary', 'onPrimary', 'primaryContainer', 'onPrimaryContainer',
-            'secondary', 'onSecondary', 'secondaryContainer', 'onSecondaryContainer',
-            'tertiary', 'onTertiary', 'tertiaryContainer', 'onTertiaryContainer',
-            'error', 'onError', 'errorContainer', 'onErrorContainer',
-            'background', 'onBackground',
-            'surface', 'onSurface', 'surfaceVariant', 'onSurfaceVariant',
-            'outline', 'outlineVariant',
-            'shadow', 'scrim', 'inverseSurface', 'inverseOnSurface', 'inversePrimary',
-            'surfaceDim', 'surfaceBright', 'surfaceContainerLowest', 'surfaceContainerLow',
-            'surfaceContainer', 'surfaceContainerHigh', 'surfaceContainerHighest'
-        ];
-
-        props.forEach(prop => {
-            // Convert camelCase to kebab-case
-            const kebab = prop.replace(/[A-Z]/g, m => '-' + m.toLowerCase());
-            const value = hexFromArgb(scheme[prop]);
-            css += `  --mat-sys-${kebab}: ${value};\n`;
-        });
-        return css;
-    };
-
-    const lightCss = generateCss(lightScheme);
-    const darkCss = generateCss(darkScheme);
+    const varsLight = this.buildMatSysVars(lightScheme);
+    const varsDark  = this.buildMatSysVars(darkScheme);
 
     const styleContent = `
-      :root, body {
-        ${lightCss}
-      }
-      @media (prefers-color-scheme: dark) {
-        :root, body {
-          ${darkCss}
-        }
-      }
-    `;
+:root, body {
+${varsLight}
+}
+@media (prefers-color-scheme: dark) {
+  :root, body {
+${varsDark}
+  }
+}
+`;
 
-    // Remove existing theme style tag if it exists
     const styleId = 'custom-theme-styles';
     let styleTag = this.document.getElementById(styleId) as HTMLStyleElement;
     if (!styleTag) {
@@ -107,5 +80,65 @@ export class ThemeService {
       this.document.head.appendChild(styleTag);
     }
     styleTag.textContent = styleContent;
+  }
+
+  /**
+   * Angular Material の system variables（--mat-sys-*）へ流すCSS文字列を生成
+   *
+   * V21の system variables には surface-dim/bright や surface-container-* が含まれる [3](https://stackoverflow.com/questions/78539225/whats-use-system-variables-in-angular-material)[4](https://github.com/angular/components/issues/29104)
+   */
+  private buildMatSysVars(dynamicScheme: any): string {
+    // system variables の候補（色系）一覧には surface container/dim/bright も含まれる [4](https://github.com/angular/components/issues/29104)
+    const roles: string[] = [
+      // Neutrals / surfaces
+      'background', 'onBackground',
+      'surface', 'onSurface',
+      'surfaceDim', 'surfaceBright',
+      'surfaceContainerLowest', 'surfaceContainerLow', 'surfaceContainer',
+      'surfaceContainerHigh', 'surfaceContainerHighest',
+      'surfaceVariant', 'onSurfaceVariant',
+      'inverseSurface', 'inverseOnSurface',
+
+      // Outline / shadow
+      'outline', 'outlineVariant',
+      'shadow', 'scrim',
+
+      // Primary / secondary / tertiary
+      'primary', 'onPrimary',
+      'primaryContainer', 'onPrimaryContainer',
+      'inversePrimary',
+
+      'secondary', 'onSecondary',
+      'secondaryContainer', 'onSecondaryContainer',
+
+      'tertiary', 'onTertiary',
+      'tertiaryContainer', 'onTertiaryContainer',
+
+      // Error
+      'error', 'onError',
+      'errorContainer', 'onErrorContainer',
+
+      // Fixed colors（Angular Materialでは “components では未使用” と書かれているが、定義自体はある [3](https://stackoverflow.com/questions/78539225/whats-use-system-variables-in-angular-material)[4](https://github.com/angular/components/issues/29104)）
+      'primaryFixed', 'primaryFixedDim', 'onPrimaryFixed', 'onPrimaryFixedVariant',
+      'secondaryFixed', 'secondaryFixedDim', 'onSecondaryFixed', 'onSecondaryFixedVariant',
+      'tertiaryFixed', 'tertiaryFixedDim', 'onTertiaryFixed', 'onTertiaryFixedVariant',
+    ];
+
+    let css = '';
+
+    for (const role of roles) {
+      // MaterialDynamicColors にその role が無い場合もあるので安全にスキップ
+      const dyn = (MaterialDynamicColors as any)[role];
+      if (!dyn || typeof dyn.getArgb !== 'function') continue;
+
+      const argb = dyn.getArgb(dynamicScheme);
+      const value = hexFromArgb(argb);
+
+      // camelCase -> kebab-case (primaryContainer -> primary-container)
+      const kebab = role.replace(/[A-Z]/g, m => '-' + m.toLowerCase());
+      css += `  --mat-sys-${kebab}: ${value};\n`;
+    }
+
+    return css;
   }
 }
