@@ -16,6 +16,13 @@ export class AppComponent {
 
   constructor(private authService: AuthService) {
     this.isLoggedIn$ = this.authService.isLoggedIn();
+    if (this.authService.getToken()) {
+      this.authService.verifyUser().subscribe({
+        error: () => {
+          // Error is handled by errorInterceptor (logs out if 404/401)
+        }
+      });
+    }
   }
 
   logout(): void {
