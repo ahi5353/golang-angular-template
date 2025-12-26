@@ -61,4 +61,8 @@ export class AuthService {
     const payload = JSON.parse(atob(token.split('.')[1]));
     return payload.username;
   }
+
+  verifyUser(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user`);
+  }
 }
