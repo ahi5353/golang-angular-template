@@ -15,6 +15,8 @@ interface SettingsResponse {
   theme_color: string;
 }
 
+const APP_FONT_FAMILY = 'Roboto, "Noto Sans JP", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif';
+
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
   private _themeColor = '#3f51b5';
@@ -60,10 +62,12 @@ export class ThemeService {
 
     const varsLight = this.buildMatSysVars(lightScheme);
     const varsDark  = this.buildMatSysVars(darkScheme);
+    const varsTypography = this.buildTypographyVars();
 
     const styleContent = `
 :root, body {
 ${varsLight}
+${varsTypography}
 }
 @media (prefers-color-scheme: dark) {
   :root, body {
@@ -140,5 +144,12 @@ ${varsDark}
     }
 
     return css;
+  }
+
+  private buildTypographyVars(): string {
+    return `
+  --mat-sys-brand-family-name: ${APP_FONT_FAMILY};
+  --mat-sys-plain-family-name: ${APP_FONT_FAMILY};
+`;
   }
 }
